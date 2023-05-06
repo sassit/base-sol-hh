@@ -12,7 +12,7 @@ async function main() {
     console.log(`Network: ${process.env.NETWORK}`)
     const wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? "")
     console.log(`Wallet Address: ${wallet.address}`)
-    const provider = ethers.providers.getDefaultProvider(process.env.NETWORK)
+    const provider = ethers.providers.getDefaultProvider(process.env.NETWORK ?? "")
     const latest = await provider.getBlock("latest")
     console.log(`Latest block: ${latest.number}`)
     const signer = wallet.connect(provider)
