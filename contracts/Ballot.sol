@@ -67,7 +67,9 @@ contract Ballot {
             !voters[voter].voted,
             "The voter already voted."
         );
-        require(voters[voter].weight == 0);
+        require(
+            voters[voter].weight == 0,
+            "The voter already has voting rights.");
         voters[voter].weight = 1;
     }
 
@@ -97,8 +99,7 @@ contract Ballot {
 
         Voter storage delegate_ = voters[to];
 
-        // Voters cannot delegate to accounts that cannot vote.
-        require(delegate_.weight >= 1);
+        require(delegate_.weight >= 1, "Voters cannot delegate to accounts that cannot vote.");
 
         // Since `sender` is a reference, this
         // modifies `voters[msg.sender]`.
