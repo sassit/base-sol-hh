@@ -59,6 +59,13 @@ const config: HardhatUserConfig = {
             gasPrice: NETWORK_GAS_PRICE["sepolia"] || "auto",
             gas: 2100000,
         },
+        mumbai: {
+            chainId: 80001,
+            url: process.env.ETH_MUMBAI_URL || "",
+            accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+            gasPrice: NETWORK_GAS_PRICE["mumbai"] || "auto",
+            gas: 2100000,
+        },
         main: {
             chainId: 1,
             url: process.env.ETH_MAINNET_URL || "",
@@ -81,6 +88,7 @@ const config: HardhatUserConfig = {
     etherscan: {
         apiKey: {
             sepolia: process.env.ETHERSCAN_API_KEY || "",
+            polygonMumbai: process.env.POLYGONSCAN_API_KEY || "",
         },
     },
 }
