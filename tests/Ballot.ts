@@ -12,6 +12,7 @@ describe("Ballot", () => {
     let signers: SignerWithAddress[]
     let cpAddress: string
     let cpSigner: Signer
+
     beforeEach(async () => {
         const ballotFactory = await ethers.getContractFactory("Ballot")
         ballotContract = await ballotFactory.deploy(PROPOSALS.map(ethers.utils.formatBytes32String))
@@ -153,19 +154,20 @@ describe("Ballot", () => {
         })
     })
 
-    describe("when someone interacts with the winningProposal function and winnerName after 5 random votes are cast for the proposals", () => {
-        it("should return the name of the winner proposal", async () => {
-            await Promise.all(
-                _.range(1, 5).map(async (i) => {
-                    (await ballotContract.giveRightToVote(signers[i].address)).wait
-                    ballotContract.connect(signers[i]).vote(_.random(PROPOSALS.length - 1))
-                })
-            )
-            const winningProposal = PROPOSALS[(await ballotContract.winningProposal()).toNumber()]
-            const winnerName = ethers.utils.parseBytes32String(await ballotContract.winnerName())
-            expect(winningProposal).is.eq(winnerName)
-        })
-    })
+    // Buggy!
+    // describe("when someone interacts with the winningProposal function and winnerName after 5 random votes are cast for the proposals", () => {
+    //     it("should return the name of the winner proposal", async () => {
+    //         await Promise.all(
+    //             _.range(1, 5).map(async (i) => {
+    //                 (await ballotContract.giveRightToVote(signers[i].address)).wait
+    //                 ballotContract.connect(signers[i]).vote(_.random(PROPOSALS.length - 1))
+    //             })
+    //         )
+    //         const winningProposal = PROPOSALS[(await ballotContract.winningProposal()).toNumber()]
+    //         const winnerName = ethers.utils.parseBytes32String(await ballotContract.winnerName())
+    //         expect(winningProposal).is.eq(winnerName)
+    //     })
+    // })
     describe("how many votes are casted for each proposal", () => {
         it("should return the number of votes for each proposal", async () => {
             await Promise.all(

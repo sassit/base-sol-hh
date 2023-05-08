@@ -18,7 +18,7 @@ const NETWORK_GAS_PRICE: Partial<Record<string, number>> = {
 
 const config: HardhatUserConfig = {
     paths: { tests: "tests" },
-    defaultNetwork: "sepolia",
+    defaultNetwork: "hardhat",
     solidity: {
         compilers: [
             {
