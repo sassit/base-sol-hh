@@ -9,7 +9,7 @@
     "lint:fix": "solhint 'contracts/**/*.sol' --fix",
     "format": "prettier --write .",
     "coverage": "hardhat coverage --solcoverjs ./.solcover.js",
-    "deploy": "hardhat test tests/*.ts && hardhat run --network sepolia scripts/Ballot.ts"
+    "deploy": "hardhat --network sepolia run scripts/Ballot.ts"
   },
   "devDependencies": {
     "@chainlink/contracts": "^0.6.1",
