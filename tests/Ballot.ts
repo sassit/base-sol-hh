@@ -73,7 +73,7 @@ describe("Ballot", () => {
             ;(await ballotContract.connect(cpSigner).giveRightToVote(signers[3].address)).wait()
             await expect(
                 ballotContract.connect(cpSigner).giveRightToVote(signers[3].address)
-            ).to.be.revertedWith("The voter already has voting rights.")
+            ).to.be.revertedWith("Already has voting rights.")
         })
     })
 
@@ -99,7 +99,7 @@ describe("Ballot", () => {
         it("should revert", async () => {
             const attConnect = ballotContract.connect(signers[3])
             await expect(attConnect.giveRightToVote(signers[3].address)).to.be.revertedWith(
-                "Only chairperson can give right to vote."
+                "Only chairperson."
             )
         })
     })
@@ -172,7 +172,7 @@ describe("Ballot", () => {
         it("should return the number of votes for each proposal", async () => {
             await Promise.all(
                 _.range(1, 5).map(async (i) => {
-                    (await ballotContract.giveRightToVote(signers[i].address)).wait
+                    ;(await ballotContract.giveRightToVote(signers[i].address)).wait
                     ballotContract.connect(signers[i]).vote(_.random(PROPOSALS.length - 1))
                 })
             )

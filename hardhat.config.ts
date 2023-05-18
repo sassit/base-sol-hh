@@ -4,6 +4,7 @@ import "@nomiclabs/hardhat-etherscan"
 import "@typechain/hardhat"
 import "hardhat-contract-sizer"
 import "hardhat-gas-reporter"
+import "hardhat-nodemon"
 import "solidity-coverage"
 
 import { HardhatUserConfig, task } from "hardhat/config"
